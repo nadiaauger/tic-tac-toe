@@ -1,25 +1,25 @@
+import { useState } from "react";
 
-export default function GameBoard() {
-  const initialGameBoard = [
-    ["null", "null", "null"],
-    ["null", "null", "null"],
-    ["null", "null", "null"],
-  ];
+export default function GameBoard({ onSelectSquare, gameBoard }) {
   return (
     <div id="game-board">
-      {console.log(initialGameBoard)}
       <ol>
-        {initialGameBoard.map((row, rowIndex) => {
+        {gameBoard.map((row, rowIndex) => (
           <li key={rowIndex}>
             <ol>
-              {row.map((col, colIndex) => {
+              {row.map((col, colIndex) => (
                 <li key={colIndex}>
-                  <button>{col}</button>
-                </li>;
-              })}
+                  <button
+                    disabled={col !== null}
+                    onClick={() => onSelectSquare(rowIndex, colIndex)}
+                  >
+                    {col}
+                  </button>
+                </li>
+              ))}
             </ol>
-          </li>;
-        })}
+          </li>
+        ))}
       </ol>
     </div>
   );
